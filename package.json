@@ -1,0 +1,29 @@
+{
+  "name": "school-management-rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Neon",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=production node ./index.js",
+    "dev": "node-dev --notify=false ./index.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validation": "^3.0.8",
+    "helmet": "^4.6.0",
+    "http-status": "^1.5.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.0.5",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "node-dev": "^7.0.0"
+  }
+}
