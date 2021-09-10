@@ -22,5 +22,15 @@ module.exports = {
                 .integer()
                 .required()
         }
+    },
+    login: {
+        body: {
+            email: Joi.string()
+                .email()
+                .required(),
+            password: Joi.string()
+                .required()
+                .max(128),
+        }
     }
 }

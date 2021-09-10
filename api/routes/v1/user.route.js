@@ -9,13 +9,13 @@ router
 router
   .route('/')
 
-  .get(controller.getStudentList)
+  .get(controller.list)
 
 
 router
     .route('/:userId')
 
-    .get(controller.getStudent)
+    .get(controller.get)
 
 
 module.exports = router;
