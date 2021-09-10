@@ -9,10 +9,12 @@ exports.register = async (req, res, next) => {
     const userData = omit(req.body, 'role');
     const error = await User.validateRoll(userData);
     if(!error) {
-      const user = new User(req.body);
-      const savedUser = await user.save();
+      const user = await new User(userData).save();
+      const userTransformed = user.transform();
       res.status(httpStatus.CREATED);
-      res.json(savedUser.transform());
+      return res.json({
+        user: userTransformed
+      });
     }
   } catch (error) {
     return next(User.checkDuplicateEmail(error));
