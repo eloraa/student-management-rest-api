@@ -3,6 +3,8 @@ const controller = require('../../controllers/user.controller');
 
 const router = express.Router();
 
+router
+  .param('userId', controller.load)
 
 router
   .route('/')
@@ -11,7 +13,7 @@ router
 
 
 router
-    .route('/:id')
+    .route('/:userId')
 
     .get(controller.getStudent)
 

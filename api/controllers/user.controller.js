@@ -1,5 +1,15 @@
 const User = require('../models/user.model')
 
+exports.load = async (req, res, next, id) => {
+    try {
+      const user = await User.get(id);
+      req.locals = { user };
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+};
+
 exports.getStudentList = async (req, res, next) => {
     try {
         const users = await User.find();
@@ -11,13 +21,6 @@ exports.getStudentList = async (req, res, next) => {
     }
 }
 
-exports.getStudent = (req, res, next) => {
-    const student = students.find(e => e.id == req.params.id)
-
-    if (!student) {
-        const error = new Error('not found')
-        next(error)
-    } else {
-        res.json(student)
-    }
+exports.getStudent = (req, res) => {
+  res.json(req.locals.user.transform())
 }
