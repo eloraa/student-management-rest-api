@@ -1,15 +1,22 @@
-const students = require('../models/user.model')
+const User = require('../models/user.model')
+const httpStatus = require('http-status')
 
-exports.register = (req, res, next) => {
-    const student = {
-        id: (students.length + 1),
-        name: req.body.name,
-        class: req.body.class,
-        classRoll: req.body.roll,
-        email: req.body.email,
-        role: req.body.role
+exports.register = async (req, res, next) => {
+    try {
+        const userData = {
+            name: req.body.name,
+            class: req.body.class,
+            roll: req.body.roll,
+            email: req.body.email,
+            password: req.body.password,
+            role: req.body.role
+        }
+        const user = await new User(userData).save();
+        const userTransformed = user.transform();
+        res.status(httpStatus.CREATED);
+        return res.json({ user: userTransformed });
+    } catch (error) {
+        return next(error);
     }
-    students.push(student)
-
-    res.json(students)
-}
+  };
+ 
