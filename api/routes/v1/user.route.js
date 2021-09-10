@@ -9,4 +9,11 @@ router
 
   .get(controller.getStudentList)
 
+
+router
+    .route('/:id')
+
+    .get(controller.getStudent)
+
+
 module.exports = router;

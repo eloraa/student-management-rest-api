@@ -1,18 +1,14 @@
+const students = require('../models/user.model')
+
 exports.getStudentList = (req, res, next) => {
-    const students = [{
-        name: 'Jonas',
-        class: '9',
-        classRoll: '2',
-        mail: 'mail@jonas.me',
-        role: 'student'
-    }, {
-        name: 'Luban',
-        class: '5',
-        classRoll: '6',
-        mail: 'mail@luban.me',
-        role: 'student'
-    }]
-
     res.json(students)
+}
 
+exports.getStudent = (req, res, next) => {
+    const student = students.find(e => e.id == req.params.id)
+
+    if(!student) {
+        const error = new Error('not found')
+        next(error)
+    } else{   res.json(student) }
 }
