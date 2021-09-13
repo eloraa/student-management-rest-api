@@ -12,11 +12,16 @@ router
 
   .get(authorize(ADMIN), controller.list)
 
+router
+  .route('/profile')
+
+  .get(authorize(), controller.loggedIn)
 
 router
     .route('/:userId')
 
     .get(authorize(LOGGED_USER), controller.get)
+
 
 
 module.exports = router;

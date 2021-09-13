@@ -24,3 +24,5 @@ exports.list = async (req, res, next) => {
 exports.get = (req, res) => {
   res.json(req.locals.user.transform())
 }
+
+exports.loggedIn = (req, res) => res.json(req.user.transform());
