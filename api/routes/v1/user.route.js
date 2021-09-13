@@ -1,5 +1,6 @@
 const express = require('express');
 const controller = require('../../controllers/user.controller');
+const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
 
 const router = express.Router();
 
@@ -9,13 +10,13 @@ router
 router
   .route('/')
 
-  .get(controller.list)
+  .get(authorize(ADMIN), controller.list)
 
 
 router
     .route('/:userId')
 
-    .get(controller.get)
+    .get(authorize(LOGGED_USER), controller.get)
 
 
 module.exports = router;

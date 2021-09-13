@@ -7,7 +7,7 @@ const httpStatus = require('http-status');
 const { jwtSecret, jwtExpirationInterval } = require('../../config/vars');
 
 
-const roles = ['student', 'teacher', 'admin']
+const roles = ['student', 'teacher']
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -97,11 +97,17 @@ userSchema.method({
 })
 
 userSchema.statics = {
+    roles,
     async get(id) {
         let user;
 
         if (mongoose.Types.ObjectId.isValid(id)) {
-            user = await this.findById(id).exec();
+            try {
+                user = await this.findById(id).exec();
+            }
+            catch(error) {
+                throw error
+            }
         }
         if (user) {
             return user;
@@ -116,9 +122,14 @@ userSchema.statics = {
     async validateRoll(userData) {
         let error
         if (userData) {
-            users = await this.find({class: userData.class}).exec();
+            try {
+                users = await this.find({class: userData.class}).exec();
+            }
+            catch(error) {
+                throw error
+            }
         }
-        if (users) {
+        if (users.length) {
             users.forEach(user => {
                 if (userData.roll == user.roll) {
                     error =  new Error('"roll" cannot be same for same "class"')

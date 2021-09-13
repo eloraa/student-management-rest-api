@@ -10,7 +10,7 @@ exports.load = async (req, res, next, id) => {
     }
 };
 
-exports.get = async (req, res, next) => {
+exports.list = async (req, res, next) => {
     try {
         const users = await User.find();
         const transformedUsers = users.map((user) => user.transform());
@@ -21,6 +21,6 @@ exports.get = async (req, res, next) => {
     }
 }
 
-exports.list = (req, res) => {
+exports.get = (req, res) => {
   res.json(req.locals.user.transform())
 }
