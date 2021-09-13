@@ -32,5 +32,13 @@ module.exports = {
                 .required()
                 .max(128),
         }
+    },
+    refresh: {
+        body: {
+          email: Joi.string()
+            .email()
+            .required(),
+          refreshToken: Joi.string().required(),
+        }
     }
 }
