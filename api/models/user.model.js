@@ -71,6 +71,19 @@ userSchema.pre('save', async function save(next) {
     }
 });
 
+userSchema.pre('updateOne', async function save(next) {
+    try {
+        const rounds = 10;
+
+        const hash = await bcrypt.hash(this._update.password, rounds);
+        this._update.password = hash;
+
+        return next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
 
 userSchema.method({
     transform() {
