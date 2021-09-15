@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const logger = require('./logger');
-const { mongo, env } = require('./vars');
+const {
+  mongo,
+  env
+} = require('./vars');
 
 // set mongoose Promise to Bluebird
 mongoose.Promise = Promise;

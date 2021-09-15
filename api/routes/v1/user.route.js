@@ -1,7 +1,11 @@
 const express = require('express');
 const controller = require('../../controllers/user.controller');
 const validate = require('express-validation')
-const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
+const {
+  authorize,
+  ADMIN,
+  LOGGED_USER
+} = require('../../middlewares/auth');
 const {
   replaceUser
 } = require('../../validations/user.validation');
@@ -22,11 +26,11 @@ router
   .get(authorize(), controller.loggedIn)
 
 router
-    .route('/:userId')
+  .route('/:userId')
 
-    .get(authorize(LOGGED_USER), controller.get)
-  
-    .put(authorize(LOGGED_USER), validate(replaceUser), controller.replace)
+  .get(authorize(LOGGED_USER), controller.get)
+
+  .put(authorize(LOGGED_USER), validate(replaceUser), controller.replace)
 
 
 

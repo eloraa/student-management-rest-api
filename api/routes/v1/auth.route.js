@@ -2,7 +2,11 @@ const express = require('express');
 const validate = require('express-validation')
 const controller = require('../../controllers/auth.controller');
 
-const { register, login, refresh } = require('../../validations/auth.validation')
+const {
+    register,
+    login,
+    refresh
+} = require('../../validations/auth.validation')
 
 const router = express.Router();
 

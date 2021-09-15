@@ -2,7 +2,9 @@ const User = require('../models/user.model')
 const httpStatus = require('http-status')
 const moment = require('moment-timezone');
 const RefreshToken = require('../models/refreshToken.model');
-const { jwtExpirationInterval } = require('../../config/vars');
+const {
+  jwtExpirationInterval
+} = require('../../config/vars');
 const {
   omit
 } = require('lodash')
@@ -41,10 +43,16 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   try {
-    const { user, accessToken } = await User.findAndGenerateToken(req.body);
+    const {
+      user,
+      accessToken
+    } = await User.findAndGenerateToken(req.body);
     const token = generateTokenResponse(user, accessToken);
     const userTransformed = user.transform();
-    return res.json({ token, user: userTransformed });
+    return res.json({
+      token,
+      user: userTransformed
+    });
   } catch (error) {
     return next(error);
   }
@@ -52,12 +60,21 @@ exports.login = async (req, res, next) => {
 
 exports.refresh = async (req, res, next) => {
   try {
-    const { email, refreshToken } = req.body;
+    const {
+      email,
+      refreshToken
+    } = req.body;
     const refreshObject = await RefreshToken.findOneAndRemove({
       userEmail: email,
       token: refreshToken,
     });
-    const { user, accessToken } = await User.findAndGenerateToken({ email, refreshObject });
+    const {
+      user,
+      accessToken
+    } = await User.findAndGenerateToken({
+      email,
+      refreshObject
+    });
     const response = generateTokenResponse(user, accessToken);
     return res.json(response);
   } catch (error) {
