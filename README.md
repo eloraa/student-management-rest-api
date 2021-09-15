@@ -3,7 +3,7 @@
 To get you started you can simply clone the repository:
 
 ```
-git clone https://github.com/eloraa/todo-app
+git clone https://github.com/eloraa/student-management-rest-api
 ```
 and install the dependencies
 ```
@@ -26,4 +26,4 @@ First we need to create the `db` directory where the database files will live in
 
 The project is preconfigured with a simple development web server. The simplest way to start this server is:
 
-    npm start   
+    npm run dev  
